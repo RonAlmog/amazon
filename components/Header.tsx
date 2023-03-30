@@ -4,7 +4,7 @@ import {
   Bars3Icon,
   ShoppingCartIcon,
   MagnifyingGlassIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/outline";
 
 type Props = {};
 
@@ -33,17 +33,23 @@ const Header = (props: Props) => {
         </div>
 
         {/* right */}
-        <div className="text-white flex items-center text-sm space-x-6 mx-6 whitespace-pre-wrap">
-          <div>
+        <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-pre-wrap">
+          <div className="link">
             <p>hello ron</p>
-            <p>orders</p>
+            <p className="font-extrabold md:text-sm">orders</p>
           </div>
-          <div>
+          <div className="link">
             <p>Returns</p>
-            <p>Orders</p>
+            <p className="font-extrabold md:text-sm">Orders</p>
           </div>
-          <div>
+          <div className=" relative link flex items-center">
+            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
+              3
+            </span>
             <ShoppingCartIcon className="h-10" />
+            <p className="hidden md:inline font-extrabold md:text-sm mt-2">
+              Basket
+            </p>
           </div>
         </div>
       </div>
