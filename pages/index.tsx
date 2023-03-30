@@ -4,10 +4,16 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
+import ProductFeed from "@/components/ProductFeed";
+import { GetServerSideProps } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+type Props = {
+  products: Product[];
+};
+
+export default function Home({ products }: Props) {
   return (
     <div className="bg-gray-100">
       <Head>
@@ -21,7 +27,19 @@ export default function Home() {
         {/* banner */}
         <Banner />
         {/* product feed */}
+        <ProductFeed products={products} />
       </main>
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const products = await fetch("https://fakestoreapi.com/products").then(
+    (res) => res.json()
+  );
+  return {
+    props: {
+      products,
+    },
+  };
+};
