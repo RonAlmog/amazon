@@ -7,7 +7,7 @@ type Props = {
 
 const ProductFeed = ({ products }: Props) => {
   return (
-    <div>
+    <div className="grid grid-flow-row md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto">
       {products.map((prod) => (
         <Product key={prod.title} product={prod} />
       ))}
