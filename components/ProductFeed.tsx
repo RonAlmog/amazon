@@ -1,5 +1,5 @@
 import React from "react";
-import Product from "./Product";
+import ProductPage from "./ProductPage";
 
 type Props = {
   products: Product[];
@@ -9,7 +9,7 @@ const ProductFeed = ({ products }: Props) => {
   return (
     <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:-mt-52 mx-auto">
       {products.slice(0, 4).map((prod) => (
-        <Product key={prod.title} product={prod} />
+        <ProductPage key={prod.title} product={prod} />
       ))}
 
       <img
@@ -19,11 +19,11 @@ const ProductFeed = ({ products }: Props) => {
       />
       <div className="md:col-span-2">
         {products.slice(4, 5).map((prod) => (
-          <Product key={prod.title} product={prod} />
+          <ProductPage key={prod.title} product={prod} />
         ))}
       </div>
       {products.slice(5, products.length).map((prod) => (
-        <Product key={prod.title} product={prod} />
+        <ProductPage key={prod.title} product={prod} />
       ))}
     </div>
   );
