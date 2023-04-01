@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { NumericFormat, PatternFormat } from "react-number-format";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "@/store/slices/basketSlice";
 
 type Props = {
   product: Product;
 };
 
 const ProductPage = ({ product }: Props) => {
+  const dispatch = useDispatch();
   // const [rating, setRating] = useState(2);
   // const [hasPrime, setHasPrime] = useState(Math.random() < 0.5);
+  const addItemToBasket = () => {
+    dispatch(addToBasket(product));
+  };
+
   const rating = 3;
   const hasPrime = true;
   return (
@@ -42,7 +49,9 @@ const ProductPage = ({ product }: Props) => {
           <div className="text-xs text-gray-500">Free next day delivery</div>
         </div>
       )}
-      <button className="mt-auto button">Add to Basket</button>
+      <button className="mt-auto button" onClick={addItemToBasket}>
+        Add to Basket
+      </button>
     </div>
   );
 };

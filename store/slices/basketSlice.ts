@@ -1,5 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface AppState {
+  items: Product[];
+}
 const initialState = {
   items: [],
 };
@@ -8,7 +11,10 @@ export const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addToBasket: (state, action) => {},
+    // actions
+    addToBasket: (state, action: PayloadAction<Product>) => {
+      state.items = [...state.items, action.payload];
+    },
     removeFromBasket: (state, action) => {},
   },
 });
