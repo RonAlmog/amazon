@@ -5,6 +5,7 @@ type Product = {
   description: string;
   category: string;
   image: string;
+  hasPrime: boolean;
   rating: {
     rate: number;
     count: number;

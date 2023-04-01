@@ -1,10 +1,14 @@
+import CheckoutProduct from "@/components/CheckoutProduct";
 import Header from "@/components/Header";
+import { selectItems } from "@/store/slices/basketSlice";
 import Image from "next/image";
 import React from "react";
+import { useSelector } from "react-redux";
 
 type Props = {};
 
-const checkout = (props: Props) => {
+const Checkout = (props: Props) => {
+  const items = useSelector(selectItems);
   return (
     <div className="bg-gray-100">
       <Header />
@@ -19,7 +23,12 @@ const checkout = (props: Props) => {
             style={{ objectFit: "contain" }}
           />
           <div className="flex flex-col p-5 space-y-10">
-            <h1 className="text-3xl border-b pb-4">Shopping Basket</h1>
+            <h1 className="text-3xl border-b pb-4">
+              {items.length === 0 ? "Your basket is empty" : "Shopping Basket"}
+            </h1>
+            {items.map((item, i) => (
+              <CheckoutProduct key={i} basketItem={item} />
+            ))}
           </div>
         </div>
 
@@ -31,4 +40,4 @@ const checkout = (props: Props) => {
   );
 };
 
-export default checkout;
+export default Checkout;
