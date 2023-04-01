@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import {
   Bars3Icon,
@@ -6,9 +7,12 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+
 type Props = {};
 
 const Header = (props: Props) => {
+  const router = useRouter();
   const { data: session } = useSession();
   const sign = (e: any) => {
     e.preventDefault();
@@ -32,6 +36,7 @@ const Header = (props: Props) => {
             alt="Amazon.ca"
             style={{ objectFit: "cover" }}
             className="cursor-pointer"
+            onClick={() => router.push("/")}
           />
         </div>
         {/* search */}
@@ -54,13 +59,15 @@ const Header = (props: Props) => {
             <p className="font-extrabold md:text-sm">Orders</p>
           </div>
           <div className=" relative link flex items-center">
-            <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
-              3
-            </span>
-            <ShoppingCartIcon className="h-10" />
-            <p className="hidden md:inline font-extrabold md:text-sm mt-2">
-              Basket
-            </p>
+            <Link href="/checkout">
+              <span className="absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">
+                3
+              </span>
+              <ShoppingCartIcon className="h-10" />
+              <p className="hidden md:inline font-extrabold md:text-sm mt-2">
+                Basket
+              </p>
+            </Link>
           </div>
         </div>
       </div>
