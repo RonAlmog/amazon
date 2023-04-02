@@ -2,12 +2,22 @@ import React from "react";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { NumericFormat, PatternFormat } from "react-number-format";
+import { useDispatch } from "react-redux";
+import { addToBasket, removeFromBasket } from "@/store/slices/basketSlice";
 
 type Props = {
   basketItem: Product;
 };
 
 const CheckoutProduct = ({ basketItem }: Props) => {
+  const id = basketItem.id;
+  const dispatch = useDispatch();
+  const addItemToBasket = () => {
+    dispatch(addToBasket(basketItem));
+  };
+  const removeItemFromBasket = () => {
+    dispatch(removeFromBasket({ id }));
+  };
   return (
     <div className="grid grid-cols-5">
       <Image
@@ -39,6 +49,15 @@ const CheckoutProduct = ({ basketItem }: Props) => {
               </div>
             </div>
           ))}
+      </div>
+      {/* add / remove buttons */}
+      <div className="flex flex-col space-y-2 justify-self-end">
+        <button className="button" onClick={addItemToBasket}>
+          Add to Basket
+        </button>
+        <button className="button" onClick={removeItemFromBasket}>
+          Remove from Basket
+        </button>
       </div>
     </div>
   );

@@ -24,9 +24,9 @@ const Checkout = (props: Props) => {
           />
           <div className="flex flex-col p-5 space-y-10">
             <h1 className="text-3xl border-b pb-4">
-              {items.length === 0 ? "Your basket is empty" : "Shopping Basket"}
+              {items?.length === 0 ? "Your basket is empty" : "Shopping Basket"}
             </h1>
-            {items.map((item, i) => (
+            {items?.map((item, i) => (
               <CheckoutProduct key={i} basketItem={item} />
             ))}
           </div>
