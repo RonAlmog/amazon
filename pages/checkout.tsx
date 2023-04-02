@@ -1,16 +1,19 @@
 import CheckoutProduct from "@/components/CheckoutProduct";
 import Header from "@/components/Header";
-import { selectItems } from "@/store/slices/basketSlice";
+import { selectItems, selectTotal } from "@/store/slices/basketSlice";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
+import { NumericFormat } from "react-number-format";
 import { useSelector } from "react-redux";
 
 type Props = {};
 
 const Checkout = (props: Props) => {
   const session = useSession();
+  const auth = session.status === "authenticated";
   const items = useSelector(selectItems);
+  const total = useSelector(selectTotal);
   return (
     <div className="bg-gray-100">
       <Header />
@@ -37,22 +40,28 @@ const Checkout = (props: Props) => {
         {/* style={{ objectFit: "fill, contain, cover, none, scale-down" }}   */}
 
         {/* right  */}
-        <div>
+        <div className="flex flex-col bg-white p-10 shadow-md">
           {items.length > 0 && (
             <>
               <h2 className="whitespace-nowrap">
-                Subtotal ({items.length} items):
-                <span className="font-bold">123</span>
+                Subtotal ({items.length} items):{" "}
+                <span className="font-bold">
+                  <NumericFormat
+                    value={total}
+                    displayType={"text"}
+                    prefix={"$"}
+                    thousandSeparator={true}
+                  />
+                </span>
               </h2>
               <button
+                disabled={!auth}
                 className={`button mt-2 ${
-                  session.status != "authenticated" &&
+                  !auth &&
                   "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
                 }`}
               >
-                {session.status != "authenticated"
-                  ? "Sign in to Checkout"
-                  : "Proceed to checkout"}
+                {auth ? "Proceed to checkout" : "Sign in to Checkout"}
               </button>
             </>
           )}
