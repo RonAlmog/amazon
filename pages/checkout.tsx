@@ -1,6 +1,7 @@
 import CheckoutProduct from "@/components/CheckoutProduct";
 import Header from "@/components/Header";
 import { selectItems } from "@/store/slices/basketSlice";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -8,6 +9,7 @@ import { useSelector } from "react-redux";
 type Props = {};
 
 const Checkout = (props: Props) => {
+  const session = useSession();
   const items = useSelector(selectItems);
   return (
     <div className="bg-gray-100">
@@ -35,6 +37,26 @@ const Checkout = (props: Props) => {
         {/* style={{ objectFit: "fill, contain, cover, none, scale-down" }}   */}
 
         {/* right  */}
+        <div>
+          {items.length > 0 && (
+            <>
+              <h2 className="whitespace-nowrap">
+                Subtotal ({items.length} items):
+                <span className="font-bold">123</span>
+              </h2>
+              <button
+                className={`button mt-2 ${
+                  session.status != "authenticated" &&
+                  "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
+                }`}
+              >
+                {session.status != "authenticated"
+                  ? "Sign in to Checkout"
+                  : "Proceed to checkout"}
+              </button>
+            </>
+          )}
+        </div>
       </main>
     </div>
   );
