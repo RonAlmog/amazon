@@ -20,20 +20,19 @@ export default async function handler(
         submit_type: "pay",
         mode: "payment",
         payment_method_types: ["card"],
-        line_items: [
-          {
-            quantity: 1,
-            price_data: {
-              currency: "cad",
-              unit_amount: 1299,
-              product_data: {
-                name: "sony tv",
-                description: "lorem ipsum mit dolor",
-                images: [],
-              },
+        line_items: items.map((item) => ({
+          quantity: 1,
+          price_data: {
+            currency: "cad",
+            unit_amount: item.price * 100,
+            product_data: {
+              name: item.title,
+              description: item.description,
+              images: [item.image],
             },
           },
-        ],
+        })),
+
         // shipping_rates: [
         //   "shr_1MsdfMF0bTSzOb9Gmssx7s9n",
         //   "shr_1MsdfDF0bTSzOb9GJdOOgV3u",
