@@ -29,6 +29,7 @@
     "react-redux": "^8.0.5",
     "react-responsive-carousel": "^3.2.23",
     "stripe": "^11.17.0",
+    "swr": "^2.1.2",
     "typescript": "5.0.2"
   },
   "devDependencies": {
