@@ -1,9 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
 
-// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-console.log("key", process.env.STRIPE_SECRET_KEY);
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2022-11-15",
 });
@@ -15,7 +12,6 @@ export default async function handler(
   if (req.method === "POST") {
     try {
       const { items, email } = req.body;
-      console.log("email", email);
       const params: Stripe.Checkout.SessionCreateParams = {
         submit_type: "pay",
         mode: "payment",
@@ -37,6 +33,7 @@ export default async function handler(
         //   "shr_1MsdfMF0bTSzOb9Gmssx7s9n",
         //   "shr_1MsdfDF0bTSzOb9GJdOOgV3u",
         // ],
+
         shipping_address_collection: {
           allowed_countries: ["CA", "US"],
         },
