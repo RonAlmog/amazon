@@ -29,10 +29,30 @@ export default async function handler(
           },
         })),
 
-        // shipping_rates: [
-        //   "shr_1MsdfMF0bTSzOb9Gmssx7s9n",
-        //   "shr_1MsdfDF0bTSzOb9GJdOOgV3u",
-        // ],
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: { amount: 0, currency: "cad" },
+              display_name: "Free shipping",
+              delivery_estimate: {
+                minimum: { unit: "business_day", value: 5 },
+                maximum: { unit: "business_day", value: 7 },
+              },
+            },
+          },
+          {
+            shipping_rate_data: {
+              type: "fixed_amount",
+              fixed_amount: { amount: 1500, currency: "cad" },
+              display_name: "Next day delivery",
+              delivery_estimate: {
+                minimum: { unit: "business_day", value: 1 },
+                maximum: { unit: "business_day", value: 1 },
+              },
+            },
+          },
+        ],
 
         shipping_address_collection: {
           allowed_countries: ["CA", "US"],
